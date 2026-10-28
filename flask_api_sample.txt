@@ -1,0 +1,20 @@
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+
+@app.get("/api/greeting")
+def get_greeting():
+    name = request.args.get("name", "World")
+    return jsonify(message=f"Hello, {name}!")
+
+
+@app.post("/api/greeting")
+def post_greeting():
+    data = request.get_json()
+    name = data.get("name", "World")
+    return jsonify(message=f"Hello, {name}!")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
